@@ -30,6 +30,14 @@ int setrlimit(__rlimit_resource_t resource, struct rlimit *rlimits)
 _syscall2(int, setrlimit, __rlimit_resource_t, resource,
 		const struct rlimit *, rlim)
 
+#elif !defined(__NR_setrlimit)
+int setrlimit(__rlimit_resource_t resource, const struct rlimit *rlimits)
+{
+        /* Use prlimit as get/setrlimit if they aren't defined.
+           plimit needs to be defined for 32bit rlimit on 32bit systems */
+        return INLINE_SYSCALL(prlimit, 0, resource, rlimits, NULL);
+}
+
 #else
 
 # define __need_NULL
