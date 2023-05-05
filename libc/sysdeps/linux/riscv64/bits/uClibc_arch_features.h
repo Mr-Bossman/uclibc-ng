@@ -11,7 +11,7 @@
 #define __UCLIBC_MMAP_HAS_6_ARGS__
 
 /* does your target use statx */
-#undef __UCLIBC_HAVE_STATX__
+#define __UCLIBC_HAVE_STATX__
 
 #define __UCLIBC_SYSCALL_ALIGN_64BIT__
 
