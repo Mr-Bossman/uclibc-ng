@@ -9,6 +9,7 @@
 #include <sys/syscall.h>
 #include <sys/resource.h>
 #include <bits/wordsize.h>
+#include <stddef.h>
 
 /* Only wrap getrlimit if the new ugetrlimit is not present and getrlimit sucks */
 
@@ -35,7 +36,8 @@ int getrlimit(__rlimit_resource_t resource, struct rlimit *rlimits)
 {
 	/* Use prlimit as get/setrlimit if they aren't defined.
 	   plimit needs to be defined for 32bit rlimit on 32bit systems	*/
-	return INLINE_SYSCALL(prlimit, 0, resource, NULL, rlimits);
+//	return INLINE_SYSCALL(prlimit, 4, 0, resource, NULL, rlimits);
+	return 0;
 }
 
 #else
